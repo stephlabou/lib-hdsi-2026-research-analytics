@@ -84,7 +84,7 @@ get the count of works from 2020–2026 from [University of California San Diego
 | retraction | 37 |
 | software-paper | 16 |
 
-The type counts add up to 135,577, compared with about 135,600 works in the full query. [Add a note if they don't match, e.g. works with no type listed.]
+The type counts add up to 135,577, compared with about 135,600 works in the full query. 
 
 **Each organization alone** (to see overlap between the four):
 
