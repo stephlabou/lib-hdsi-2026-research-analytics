@@ -33,7 +33,7 @@ get works from 2020–2026 from [University of California San Diego](I36258959) 
 
 ## Results
 
-**Total works returned:** about 135,600 (as shown by the web interface on 2026-11-03). Counts change as OpenAlex updates, so rerun the query to verify.
+**Total works returned:** 135,577 (shown in the export dialog on 2026-11-03). The year counts and the type counts below each add up to this number. Counts change as OpenAlex updates, can rerun query to double check.
 
 **Works per year** (modify query to group by year, modification shown below):
 
@@ -84,7 +84,7 @@ get the count of works from 2020–2026 from [University of California San Diego
 | retraction | 37 |
 | software-paper | 16 |
 
-The type counts add up to 135,577, compared with about 135,600 works in the full query. 
+The type counts add up to 135,577, same as the amount of works in the full query. 
 
 **Each organization alone** (to see overlap between the four):
 
@@ -95,6 +95,26 @@ The type counts add up to 135,577, compared with about 135,600 works in the full
 | Scripps Institution of Oceanography | 8,771 |
 | UC San Diego Medical Center | 650 |
 
-Counts for each organization alone sum to 145,738, compared with about 135,600 works in the combined query, so about 10,000 works are affiliated with more than one of the four organizations.
+The UCSD query alone returns 135,577 works, which is the same as the combined query. So SDSC, SIO, and the Medical Center don't add works beyond UCSD (every work found for those three is already in the UCSD (about 10,000) results).
 
 ## How to run and export
+
+1. Go to https://openalex.org and open the OQL tab at the top of the search page.
+2. Paste the OQL text from above and run it. The result count appears with the results.
+3. Open the export dialog. The export button looks like the download sign. The dialog shows the row count and an estimated cost, and lets you choose:
+   - **Format:** CSV (Excel), CSV, Endnote, BibTeX, or Text. Used: CSV
+   - **Include abstracts:** off, since file size will be dramatically increased
+   - **Columns:** 97 columns total columns in 11 categories (Aboutness, Author, Source, Funder, Institution, Geo, Open Access, and others).
+4. Start the export and save the file in a `data/` folder next to the script. The `data/` folder is in `.gitignore`.
+
+**INCLUDE ALL COLUMNS**
+
+Previous Columns chosen (24): Title, Author, Year, Citation count, Open access, ROR ID, Work ID, ORCID, DOI, Type, Author IDs, Institution, Institution IDs, Country, Source, Source IDs, Funder, Funder IDs, Domain, Field, Topic, Open Access status, Is paratext, Retracted
+
+
+
+## Export notes (usability findings)
+**Cost and size**
+- The full export of 135,577 rows showed an estimated cost of about $0.136 of a remaining $0.978 budget, so exports are limited. The estimate did not change when columns were added or removed.
+- Test export (a small filtered query, ```get works where institution is (I181653535) and year is (2024)```): 98 works, 24 columns, 0.18 MB. Extrapolating at about 1.8 KB per work gives roughly 250 MB for the full export. This is a rough estimate, since the test works may not be typical.
+- Full export size: 
