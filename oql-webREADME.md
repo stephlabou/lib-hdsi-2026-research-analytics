@@ -1,6 +1,6 @@
 # OpenAlex via the Web Interface with OQL
 
-This branch documents the web interface with OQL approach for pulling UC San Diego content (https://docs.google.com/spreadsheets/d/1Xl57Z2alFMfAEM4kl-07jEZIHma6Q_mf/edit?gid=1036025528#gid=1036025528) from OpenAlex (workflow part 1) and converting it to tabular format (workflow part 2). 
+This branch documents the web interface with OQL approach for pulling UC San Diego content from OpenAlex (workflow part 1) and converting it to tabular format (workflow part 2). 
 
 ## What does this approach do?
 
@@ -118,3 +118,31 @@ Previous Columns chosen (24): Title, Author, Year, Citation count, Open access, 
 - The full export of 135,577 rows showed an estimated cost of about $0.136 of a remaining $0.978 budget, so exports are limited. The estimate did not change when columns were added or removed.
 - Test export (a small filtered query, ```get works where institution is (I181653535) and year is (2024)```): 98 works, 24 columns, 0.18 MB. Extrapolating at about 1.8 KB per work gives roughly 250 MB for the full export. This is a rough estimate, since the test works may not be typical.
 - Full export size: 
+
+
+## Format conversion (workflow part 2)
+ 
+**Script:** `convert_export.py`
+ 
+**What it does:** reads the export, splits the `|`-separated cells, and writes tables to `data/tables/`. It converts the paratext and retracted labels to True/False, drops duplicate Work IDs, reports any works whose columns don't line up, and prints table sizes and run time.
+ 
+**Tables** (all linked by `Work ID`):
+ 
+| Table | One row per | Columns |
+| --- | --- | --- |
+| works | work | Work ID, DOI, Title, Year, Type, Citation count, Open access, Open Access status, Source, Source IDs, Domain, Field, Topic, Is paratext, Retracted |
+| work_authors | author per work | Work ID, Position, Author, Author ID, ORCID |
+| work_countries | country entry per work | Work ID, Position, Country |
+| work_institutions | institution per work | Work ID, Position, Institution, Institution ID |
+| work_funders | funder per work | Work ID, Position, Funder, Funder ID |
+ 
+Notes on use:
+- Sum citations from the works table only. Summing after a join to work_authors counts each work once per author.
+- Works with misaligned author columns are skipped and reported (none expected). For institutions and funders, misaligned works keep their IDs with blank names.
+- Institution names for those works can be filled in from other works that share the same Institution ID.
+**Results on the 98-work test export:** **[FILL IN: rows and size of each table, and any warnings]**
+ 
+**Results on the full export:** **TODO**
+
+### NOTE: 
+- No publisher column, no author-to-institution link, a Country column that doesn't line up with authors, and funder blank for about 30% of works in the test export.
