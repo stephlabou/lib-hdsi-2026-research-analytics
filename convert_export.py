@@ -47,7 +47,7 @@ import pandas as pd
 # Folder containing this script (or the current folder, when run in a notebook)
 BASE_DIR = Path(__file__).resolve().parent if "__file__" in globals() else Path.cwd()
 
-INPUT_NAME = "works-2026-11-04T01-22-25.csv"   # the export file inside data/
+INPUT_NAME = "works-2026-11-16T22-21-03.csv"   # the export file inside data/
 INPUT_PATH = BASE_DIR / "data" / INPUT_NAME
 OUTPUT_DIR = BASE_DIR / "data" / "tables"      # data/ is in .gitignore, so nothing here is committed
 
