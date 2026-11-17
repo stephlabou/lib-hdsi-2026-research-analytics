@@ -121,7 +121,7 @@ The UCSD query alone returns 135,577 works, the same as the combined query. So S
 - Author, Author IDs, and ORCID had the same number of entries in all 98 test works, but not in all works of the full export (538 of 131,927 differ; see conversion results).
 - **Country does not line up with authors.** In 9 of the 98 test works it has more entries than there are authors (for example 163 entries for 100 authors). It appears to hold one entry per author affiliation, but there is no way to tell which author each entry belongs to. Countries are stored in their own table.
 - Institution and Institution IDs are a deduplicated list per work, not one per author (for example 51 authors and 9 institutions on one work), so authors cannot be matched to institutions.
-- ROR ID has a different count from both the authors and the institutions. In the 10 works checked it was at least as long as both (for example 107 entries for 51 authors and 9 institutions), and some RORs repeat within a work. It may hold one entry per author affiliation, but there is no marker showing which author each entry belongs to. It is kept in its own table (work_rors) and is not linked to authors or institutions.
+- ROR ID has a different count from both the authors and the institutions. In the 10 works checked it was at least as long as both (for example 107 entries for 51 authors and 9 institutions). It appears to hold one entry per author affiliation, in author order, with repeats and no separator between authors. Example: a work with 4 authors and 2 institutions (UCSD and SDSC) had 5 ROR entries: UCSD's ROR four times and SDSC's once. The number of entries for UCSD's ROR therefore approximates how many authors on a work are affiliated with UCSD, but the export doesn't show which authors they are. It is kept in its own table (work_rors) and is not linked to authors or institutions.
 - There is no publisher column, only Source (the journal). The top publishers table needs a separate lookup using Source IDs.
 - Funder was blank for 29 of 98 test works (about 30%).
 - Some columns hold text labels instead of true/false. In the full export the labels are "not is paratext" / "is paratext" and "Isn't retracted" / "Is retracted". The script converts them to True/False.
@@ -167,6 +167,11 @@ The UCSD query alone returns 135,577 works, the same as the combined query. So S
 - **538 works (0.4%) were skipped from work_authors** because Author, Author IDs, and ORCID had different numbers of entries. 
 - 1,150 works have institution names that don't match the institution IDs. They are kept with IDs only and blank names. 73 works have the same issue for funders.
 
+
+**Notes on use**
+- `work_rors` keeps every ROR ID entry in its original order, including repeats. The entries are not linked to specific authors.
+- Sum citations from the works table only. Summing after a join to work_authors counts each work once per author.
+- Institution names for the works kept with IDs only can be filled in from other works that share the same Institution ID.
 
 ## Problems
 
