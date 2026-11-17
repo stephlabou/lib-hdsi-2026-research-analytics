@@ -10,6 +10,7 @@ Tables written (to data/tables/):
   works.csv              one row per work
   work_authors.csv       one row per author per work (name, ID, ORCID)
   work_countries.csv     one row per country entry per work (see note below)
+  work_rors.csv          one row per ROR ID entry per work (see note below)
   work_institutions.csv  one row per institution per work
   work_funders.csv       one row per funder per work
 
@@ -19,6 +20,11 @@ Note on countries: the export's Country column does NOT always have one entry pe
 author (some works list more countries than authors, probably because an author can
 have several affiliations). So countries are kept in their own table and are not
 tied to a specific author.
+
+Note on ROR IDs: the ROR ID column has its own count, different from the authors and
+from the institutions (it looks like one entry per author affiliation, with repeats).
+It is kept in its own table, in its original order and with repeats, and is not tied
+to a specific author or institution.
 
 The export is read in chunks of CHUNK_SIZE works, so the full export (hundreds of
 MB) does not have to fit in memory at once.
@@ -59,7 +65,7 @@ WORK_COLUMNS = [
 # Every column the script uses. If the export has more columns than these, the extra
 # ones are ignored (they are never loaded, which keeps memory use and run time down).
 NEEDED_COLUMNS = WORK_COLUMNS + [
-    "Author", "Author IDs", "ORCID", "Country",
+    "Author", "Author IDs", "ORCID", "Country", "ROR ID",
     "Institution", "Institution IDs", "Funder", "Funder IDs",
 ]
 
@@ -88,8 +94,9 @@ def explode_columns(df, columns, new_names, id_column=None, drop_blank_rows=Fals
     Without id_column, works whose columns have different numbers of values are skipped,
     so misaligned data never ends up in the table silently.
 
-    Returns (table, skipped, partial): the table, plus the Work IDs that were skipped
-    and the Work IDs that were kept with IDs only.
+    Returns (table, skipped, partial): the table, plus the works that were skipped and the
+    works that were kept with IDs only. Each of those is a (Work ID, details) pair, where
+    the details show how many entries each column had, e.g. "Author=5; Author IDs=4".
     """
     # Build the table one column at a time (uses less memory than building row by row)
     out = {"Work ID": [], "Position": []}
@@ -100,6 +107,7 @@ def explode_columns(df, columns, new_names, id_column=None, drop_blank_rows=Fals
 
     for work_id, *cells in zip(df["Work ID"], *(df[c] for c in columns)):
         lists = [split_cell(cell) for cell in cells]
+        raw_counts = [len(item) for item in lists]    # entries per column, before any padding
         n = max(len(item) for item in lists)
         if n == 0:
             continue                      # nothing to record for this work
@@ -108,14 +116,15 @@ def explode_columns(df, columns, new_names, id_column=None, drop_blank_rows=Fals
         lists = [item if item else [""] * n for item in lists]
 
         if any(len(item) != n for item in lists):
+            detail = "; ".join(f"{c}={k}" for c, k in zip(columns, raw_counts))
             if id_column is None:
-                skipped.append(work_id)   # columns don't line up, so don't guess
+                skipped.append((work_id, detail))   # columns don't line up, so don't guess
                 continue
             # Keep the IDs, leave the other columns blank
             ids = lists[id_column]
             n = len(ids)
             lists = [ids if k == id_column else [""] * n for k in range(len(lists))]
-            partial.append(work_id)
+            partial.append((work_id, detail))
 
         for position in range(n):
             values = [item[position] for item in lists]
@@ -156,7 +165,7 @@ def append_table(table, name, first_chunk):
 start = time.time()
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-TABLE_NAMES = ["works", "work_authors", "work_countries", "work_institutions", "work_funders"]
+TABLE_NAMES = ["works", "work_authors", "work_countries", "work_rors", "work_institutions", "work_funders"]
 for name in TABLE_NAMES:
     (OUTPUT_DIR / f"{name}.csv").unlink(missing_ok=True)   # start fresh, so reruns don't pile up
 
@@ -206,6 +215,8 @@ for chunk_number, chunk in enumerate(chunks, start=1):
             chunk, ["Author", "Author IDs", "ORCID"], ["Author", "Author ID", "ORCID"]),
         "work_countries": explode_columns(
             chunk, ["Country"], ["Country"], drop_blank_rows=True),
+        "work_rors": explode_columns(
+            chunk, ["ROR ID"], ["ROR ID"], drop_blank_rows=True),
         "work_institutions": explode_columns(
             chunk, ["Institution", "Institution IDs"], ["Institution", "Institution ID"],
             id_column=1, drop_blank_rows=True),
@@ -233,11 +244,23 @@ print("Retracted labels:  ", dict(retracted_labels))
 print("\nChecks:")
 for name in TABLE_NAMES[1:]:
     if skipped[name]:
-        print(f"  WARNING ({name}): skipped {len(skipped[name]):,} works with misaligned columns, e.g. {skipped[name][:3]}")
+        print(f"  WARNING ({name}): skipped {len(skipped[name]):,} works with misaligned columns, e.g. {[w for w, _ in skipped[name][:3]]}")
     elif partial[name]:
-        print(f"  NOTE ({name}): {len(partial[name]):,} works had misaligned columns; kept the IDs and left other columns blank, e.g. {partial[name][:3]}")
+        print(f"  NOTE ({name}): {len(partial[name]):,} works had misaligned columns; kept the IDs and left other columns blank, e.g. {[w for w, _ in partial[name][:3]]}")
     else:
         print(f"  OK ({name}): all columns lined up")
+
+# Save the misaligned works to a file, so they can be looked at later
+log_rows = []
+for name in TABLE_NAMES[1:]:
+    log_rows += [(name, w, "skipped", d) for w, d in skipped[name]]
+    log_rows += [(name, w, "kept IDs only", d) for w, d in partial[name]]
+log_path = OUTPUT_DIR / "misaligned_works.csv"
+if log_rows:
+    pd.DataFrame(log_rows, columns=["Table", "Work ID", "Outcome", "Entries per column"]).to_csv(log_path, index=False)
+    print(f"\nMisaligned works are listed in {log_path.relative_to(BASE_DIR)}")
+else:
+    log_path.unlink(missing_ok=True)
 
 print("\nTable sizes:")
 for name in TABLE_NAMES:
