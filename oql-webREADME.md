@@ -123,6 +123,10 @@ Previous Columns chosen (24): Title, Author, Year, Citation count, Open access, 
 ## Format conversion (workflow part 2)
  
 **Script:** `convert_export.py`
+
+**GUIDE:**: 
+1. Take downloaded csv name and replace the current csv in quotes on line 44: INPUT_NAME = "works-2026-11-16T22-21-03.csv"   # the export file inside data/
+
  
 **What it does:** reads the export, splits the `|`-separated cells, and writes tables to `data/tables/`. It converts the paratext and retracted labels to True/False, drops duplicate Work IDs, reports any works whose columns don't line up, and prints table sizes and run time.
  
