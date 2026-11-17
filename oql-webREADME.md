@@ -98,7 +98,7 @@ The type counts add up to 135,577, the same as the number of works in the full q
 The UCSD query alone returns 135,577 works, the same as the combined query. So SDSC, SIO, and the Medical Center add no works beyond UCSD: every work found for those three is already in the UCSD results. Adding the four counts gives 145,738, which overcounts by 10,161, exactly the total of the three smaller organizations.
 
 ## How to run and export
-
+ 
 1. Go to https://openalex.org and open the OQL tab at the top of the search page.
 2. Paste the OQL text from above and run it. The result count appears with the results.
 3. Open the export dialog. The export button looks like a download sign. The dialog shows the row count and an estimated cost, and lets you choose:
@@ -106,10 +106,9 @@ The UCSD query alone returns 135,577 works, the same as the combined query. So S
    - **Include abstracts:** off, since the file size is dramatically increased
    - **Columns:** the picker offers 97 columns in 11 categories (Aboutness, Author, Source, Funder, Institution, Geo, Open Access, and others).
 4. Start the export and save the file in a `data/` folder next to the script. The `data/` folder is in `.gitignore`.
-
-**Columns used:** all columns were exported. The resulting CSV has 105 columns, and the script reads the 23 it needs: Work ID, DOI, Title, Year, Type, Citation count, Open access, Open Access status, Source, Source IDs, Domain, Field, Topic, Is paratext, Retracted, Author, Author IDs, ORCID, Country, Institution, Institution IDs, Funder, Funder IDs.
-
-(The first test export used 24 columns: the 23 above plus ROR ID. ROR ID is not used; see findings.)
+**Columns used:** all columns were exported. The resulting CSV has 105 columns, and the script reads the 24 it needs: Work ID, DOI, Title, Year, Type, Citation count, Open access, Open Access status, Source, Source IDs, Domain, Field, Topic, Is paratext, Retracted, Author, Author IDs, ORCID, Country, ROR ID, Institution, Institution IDs, Funder, Funder IDs.
+ 
+(The first test export used these same 24 columns.)
 
 ## Export notes (usability findings)
 
@@ -122,7 +121,7 @@ The UCSD query alone returns 135,577 works, the same as the combined query. So S
 - Author, Author IDs, and ORCID had the same number of entries in all 98 test works, but not in all works of the full export (538 of 131,927 differ; see conversion results).
 - **Country does not line up with authors.** In 9 of the 98 test works it has more entries than there are authors (for example 163 entries for 100 authors). It appears to hold one entry per author affiliation, but there is no way to tell which author each entry belongs to. Countries are stored in their own table.
 - Institution and Institution IDs are a deduplicated list per work, not one per author (for example 51 authors and 9 institutions on one work), so authors cannot be matched to institutions.
-- ROR ID has a third count that matches neither the authors nor the institutions, and is not used.
+- ROR ID has a different count from both the authors and the institutions. In the 10 works checked it was at least as long as both (for example 107 entries for 51 authors and 9 institutions), and some RORs repeat within a work. It may hold one entry per author affiliation, but there is no marker showing which author each entry belongs to. It is kept in its own table (work_rors) and is not linked to authors or institutions.
 - There is no publisher column, only Source (the journal). The top publishers table needs a separate lookup using Source IDs.
 - Funder was blank for 29 of 98 test works (about 30%).
 - Some columns hold text labels instead of true/false. In the full export the labels are "not is paratext" / "is paratext" and "Isn't retracted" / "Is retracted". The script converts them to True/False.
@@ -142,7 +141,7 @@ The UCSD query alone returns 135,577 works, the same as the combined query. So S
 **What it does:** reads the export in chunks of 10,000 works (so the whole file never has to fit in memory), splits the `|`-separated cells, and writes tables to `data/tables/`. It converts the paratext and retracted labels to True/False, drops duplicate Work IDs, reports any works whose columns don't line up (also saved to `data/tables/misaligned_works.csv`), and prints table sizes and run time.
 
 **Tables** (all linked by `Work ID`):
-
+ 
 | Table | One row per | Columns |
 | --- | --- | --- |
 | works | work | Work ID, DOI, Title, Year, Type, Citation count, Open access, Open Access status, Source, Source IDs, Domain, Field, Topic, Is paratext, Retracted |
@@ -150,7 +149,8 @@ The UCSD query alone returns 135,577 works, the same as the combined query. So S
 | work_countries | country entry per work | Work ID, Position, Country |
 | work_institutions | institution per work | Work ID, Position, Institution, Institution ID |
 | work_funders | funder per work | Work ID, Position, Funder, Funder ID |
-
+| work_rors | ROR ID entry per work | Work ID, Position, ROR ID |
+ 
 **Results on the full export (2026-11-16):** 131,927 works read, 0 duplicates, 9.6 seconds.
 
 | Table | Rows | Size |
@@ -160,6 +160,8 @@ The UCSD query alone returns 135,577 works, the same as the combined query. So S
 | work_countries | 2,966,770 | 55.21 MB |
 | work_institutions | 900,384 | 48.42 MB |
 | work_funders | 299,508 | 18.66 MB |
+| work_rors | 2,677,515 | 110.17 MB | 
+
 
 - 49 works are labeled paratext and 29 are labeled retracted.
 - **538 works (0.4%) were skipped from work_authors** because Author, Author IDs, and ORCID had different numbers of entries. 
