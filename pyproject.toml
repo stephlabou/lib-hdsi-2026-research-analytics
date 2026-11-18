@@ -1,0 +1,19 @@
+[project]
+name = "openalex-ucsd"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "fisik-yum", email = "54129197+fisik-yum@users.noreply.github.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=2.0.0",
+    "openpyxl>=3.1.5",
+]
+
+[project.scripts]
+openalex-ucsd = "openalex_ucsd:main"
+
+[build-system]
+requires = ["uv_build>=0.13.6,<0.14.0"]
+build-backend = "uv_build"
