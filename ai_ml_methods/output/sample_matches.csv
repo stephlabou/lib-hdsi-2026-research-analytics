@@ -1,0 +1,81 @@
+method,work_id,year,title
+Machine learning,W4280605983,2022,HyperSpike: HyperDimensional Computing for More Efficient and Robust Spiking Neural Networks
+Machine learning,W4414650951,2025,Waldo: Automated discovery of adverse events from unstructured self reports
+Machine learning,W4405755362,2024,HCVP: Leveraging Hierarchical Contrastive Visual Prompt for Domain Generalization
+Machine learning,W4318815867,2023,Deducing the EOS of dense neutron star matter with machine learning
+Machine learning,W4412039082,2025,The cross-cutting role of Ocean Decade Challenge 7 in achieving a sustainable and resilient global ocean observing system
+Machine learning,W7204178970,2026,Data-driven modeling of broadband modal propagation for coastal oceanic waveguides
+Machine learning,W4221160707,2022,RES-HD: Resilient Intelligent Fault Diagnosis Against Adversarial Attacks Using Hyper-Dimensional Computing
+Machine learning,W3000291311,2020,Performance and Cost Assessment of Machine Learning Interatomic Potentials
+Machine learning,W3157730063,2021,Risk Bounds for Over-parameterized Maximum Margin Classification on Sub-Gaussian Mixtures
+Machine learning,W4225834472,2022,Machine Learning-Based Models Predicting Outpatient Surgery End Time and Recovery Room Discharge at an Ambulatory Surgery Center
+Machine learning,W3156421572,2020,Decoding Grain Boundary Thermodynamics in High-Entropy Alloys in a 5D Space: Coupled Segregation and Disordering
+Machine learning,W3197942389,2021,The Clinical Information Systems Response to the COVID-19 Pandemic
+Machine learning,W4296079222,2022,Creating a Spanish Speech Corpus to Develop Digital Dementia Biomarkers Using Machine Learning
+Machine learning,W4400286281,2024,"The past, present and future of underwater passive acoustic monitoring"
+Machine learning,W4392301372,2024,"Development, validation, and transportability of several machine-learned, non-exercise-based VO2max prediction models for older adults"
+Machine learning,W4400223381,2024,Enhancing the diagnostic yield of esophageal manometry using distension-contraction plots of peristalsis and artificial intelligence
+Machine learning,W3175766166,2021,Guest Column: Models of computation between decision trees and communication
+Machine learning,W4406201174,2024,Using Machine Learning to Explore Multimodal Digital Markers for Early Detection of Cognitive Impairment in Alzheimer’s Disease
+Machine learning,W7131240129,2026,Efficient SoC Power Estimation With Machine Learning
+Machine learning,W3085003843,2022,Autonomous Navigation in Unknown Environments With Sparse Bayesian Kernel-Based Occupancy Mapping
+Deep learning / neural networks,W4280605983,2022,HyperSpike: HyperDimensional Computing for More Efficient and Robust Spiking Neural Networks
+Deep learning / neural networks,W3176311349,2021,Disperse and preserve the perverse: computing how hip-hop censorship changed popular music genres in China
+Deep learning / neural networks,W4376155261,2023,Deep Learning Synthetic Strain: Quantitative Assessment of Regional Myocardial Wall Motion at MRI
+Deep learning / neural networks,W4409657316,2025,REACT: Residual-Adaptive Contextual Tuning for Fast Model Adaptation in Threat Detection
+Deep learning / neural networks,W4386466937,2023,Identifying the optimal deep learning architecture and parameters for automatic beam aperture definition in 3D radiotherapy
+Deep learning / neural networks,W3100423138,2020,On the Use of Difference of Log-Sum-Exp Neural Networks to Solve Data-Driven Model Predictive Control Tracking Problems
+Deep learning / neural networks,W4367151735,2023,Uncertainty quantification of deep learning based direction-of-arrival estimation with conformal prediction
+Deep learning / neural networks,W4221160707,2022,RES-HD: Resilient Intelligent Fault Diagnosis Against Adversarial Attacks Using Hyper-Dimensional Computing
+Deep learning / neural networks,W4404168079,2024,Measurements of inclusive and differential cross sections for top quark production in association with a Z boson in proton-proton collisions at $ \sqrt{s} $ = 13 TeV
+Deep learning / neural networks,W3157730063,2021,Risk Bounds for Over-parameterized Maximum Margin Classification on Sub-Gaussian Mixtures
+Deep learning / neural networks,W4225311966,2022,A neural network‐enhanced reproducing kernel particle method for modeling strain localization
+Deep learning / neural networks,W4225834472,2022,Machine Learning-Based Models Predicting Outpatient Surgery End Time and Recovery Room Discharge at an Ambulatory Surgery Center
+Deep learning / neural networks,W4200571270,2021,Perception of Daily Time: Insights from the Fruit Flies
+Deep learning / neural networks,W3137106869,2021,PVStereo: Pyramid Voting Module for End-to-End Self-Supervised Stereo Matching
+Deep learning / neural networks,W4403487442,2024,Verification of Geometric Robustness of Neural Networks via Piecewise Linear Approximation and Lipschitz Optimisation
+Deep learning / neural networks,W3127230241,2021,Genetic Probe for Visualizing Glutamatergic Synapses and Vesicles by 3D Electron Microscopy
+Deep learning / neural networks,W4413018705,2025,FERGI: Automatic Scoring of User Preferences for Text-to-Image Generation from Spontaneous Facial Expression Reaction
+Deep learning / neural networks,W3212682848,2021,Systematic Generalization with Edge Transformers
+Deep learning / neural networks,W3091977288,2020,AHEC: End-to-end Compiler Framework for Privacy-preserving Machine Learning Acceleration
+Deep learning / neural networks,W4403780034,2024,A Spatiotemporal Perspective on Dynamical Computation in Neural Information Processing Systems
+Large language models,W4414650951,2025,Waldo: Automated discovery of adverse events from unstructured self reports
+Large language models,W4409474941,2025,Deep Semantic Graph Learning via Large Language Models-Based Node Enhancement
+Large language models,W7165906970,2026,Medical Record Abstraction for Quality Improvement in Sepsis Care Using Artificial Intelligence: A Cluster Randomized Trial
+Large language models,W7160633966,2026,How Deep Can LLMs Learn to Reason? Expressiveness Is Key
+Large language models,W4408355713,2025,FUTGA-MIR: Enhancing Fine-grained and Temporally-aware Music Understanding with Music Information Retrieval
+Large language models,W7203759929,2026,A Comparative Evaluation of Schema Subsetting for LLM-based NL-to-SQL over Large-Schema Databases
+Large language models,W4416424586,2025,Encrypted Prompt: Securing LLM Applications Against Unauthorized Actions
+Large language models,W4411181503,2025,"Answering real-world clinical questions using large language model, retrieval-augmented generation, and agentic systems"
+Large language models,W7167511767,2026,Dog Walk: Narrating Human-AI Alignment through Companion Robots
+Large language models,W4403573166,2024,Improving the Language Understanding Capabilities of Large Language Models Using Reinforcement Learning
+Large language models,W4396232287,2024,MetaWriter: Exploring the Potential and Perils of AI Writing Support in Scientific Peer Review
+Large language models,W7204901972,2026,Agent2UCB: Agentic System for Generative Engine Optimization
+Large language models,W4398160410,2024,Large Language Models and the Wisdom of Small Crowds
+Large language models,W4387524059,2023,Emotion quantification and classification using the neutrosophic approach to deep learning
+Large language models,W4408614752,2025,Less or More: Towards Glanceable Explanations for LLM Recommendations Using Ultra-Small Devices
+Large language models,W4401001490,2024,Natural Language Processing in medicine and ophthalmology: A review for the 21st-century clinician
+Large language models,W7106853547,2025,"Diagnosing Memorization in Chain-of-Thought Reasoning, One Token at a Time"
+Large language models,W4416365642,2025,LaDiR: Latent Diffusion Enhances LLMs for Text Reasoning
+Large language models,W7154573700,2025,Dissecting the Ullman Variations with a SCALPEL: Why do LLMs fail at Trivial Alterations to the False Belief Task?
+Large language models,W4379539416,2023,A Mathematical Abstraction for Balancing the Trade-off Between Creativity and Reality in Large Language Models
+Any AI/ML,W4280605983,2022,HyperSpike: HyperDimensional Computing for More Efficient and Robust Spiking Neural Networks
+Any AI/ML,W4414650951,2025,Waldo: Automated discovery of adverse events from unstructured self reports
+Any AI/ML,W4405755362,2024,HCVP: Leveraging Hierarchical Contrastive Visual Prompt for Domain Generalization
+Any AI/ML,W4409474941,2025,Deep Semantic Graph Learning via Large Language Models-Based Node Enhancement
+Any AI/ML,W3176311349,2021,Disperse and preserve the perverse: computing how hip-hop censorship changed popular music genres in China
+Any AI/ML,W4318815867,2023,Deducing the EOS of dense neutron star matter with machine learning
+Any AI/ML,W7165906970,2026,Medical Record Abstraction for Quality Improvement in Sepsis Care Using Artificial Intelligence: A Cluster Randomized Trial
+Any AI/ML,W4376155261,2023,Deep Learning Synthetic Strain: Quantitative Assessment of Regional Myocardial Wall Motion at MRI
+Any AI/ML,W4409657316,2025,REACT: Residual-Adaptive Contextual Tuning for Fast Model Adaptation in Threat Detection
+Any AI/ML,W4412039082,2025,The cross-cutting role of Ocean Decade Challenge 7 in achieving a sustainable and resilient global ocean observing system
+Any AI/ML,W4386466937,2023,Identifying the optimal deep learning architecture and parameters for automatic beam aperture definition in 3D radiotherapy
+Any AI/ML,W7204178970,2026,Data-driven modeling of broadband modal propagation for coastal oceanic waveguides
+Any AI/ML,W7160633966,2026,How Deep Can LLMs Learn to Reason? Expressiveness Is Key
+Any AI/ML,W3100423138,2020,On the Use of Difference of Log-Sum-Exp Neural Networks to Solve Data-Driven Model Predictive Control Tracking Problems
+Any AI/ML,W4408355713,2025,FUTGA-MIR: Enhancing Fine-grained and Temporally-aware Music Understanding with Music Information Retrieval
+Any AI/ML,W7163150560,2026,Characterization of vascular tortuosity throughout the murine oxygen-induced retinopathy model of ischemic retinopathy
+Any AI/ML,W7203759929,2026,A Comparative Evaluation of Schema Subsetting for LLM-based NL-to-SQL over Large-Schema Databases
+Any AI/ML,W4392660152,2024,Pediatric endoscopy: how can we improve patient outcomes and ensure best practices?
+Any AI/ML,W4367151735,2023,Uncertainty quantification of deep learning based direction-of-arrival estimation with conformal prediction
+Any AI/ML,W4221160707,2022,RES-HD: Resilient Intelligent Fault Diagnosis Against Adversarial Attacks Using Hyper-Dimensional Computing
